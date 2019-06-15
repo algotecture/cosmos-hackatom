@@ -13,3 +13,5 @@ build
 # IDE
 .idea/
 *.iml
+/signedTx.json
+/unsignedTx.json
