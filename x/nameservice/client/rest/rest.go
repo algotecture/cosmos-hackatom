@@ -33,7 +33,12 @@ type buyNameReq struct {
 	Name    string       `json:"name"`
 	Amount  string       `json:"amount"`
 	Buyer   string       `json:"buyer"`
+	Lat     string       `json:"lat"`
+	Lon     string       `json:"lon"`
 }
+
+// have (string, "github.com/cosmos/cosmos-sdk/types".Coins, "github.com/cosmos/cosmos-sdk/types".AccAddress)
+// want (string, "github.com/cosmos/cosmos-sdk/types".Coins, "github.com/cosmos/cosmos-sdk/types".AccAddress, string, string)
 
 func buyNameHandler(cdc *codec.Codec, cliCtx context.CLIContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -62,7 +67,7 @@ func buyNameHandler(cdc *codec.Codec, cliCtx context.CLIContext) http.HandlerFun
 		}
 
 		// create the message
-		msg := types.NewMsgBuyName(req.Name, coins, addr)
+		msg := types.NewMsgBuyLocation(req.Name, coins, addr, req.Lat, req.Lon)
 		err = msg.ValidateBasic()
 		if err != nil {
 			rest.WriteErrorResponse(w, http.StatusBadRequest, err.Error())

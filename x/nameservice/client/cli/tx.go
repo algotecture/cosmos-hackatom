@@ -7,7 +7,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/context"
 	"github.com/cosmos/cosmos-sdk/client/utils"
 	"github.com/cosmos/cosmos-sdk/codec"
-	"github.com/cosmos/sdk-application-tutorial/x/nameservice/types"
+	"github.com/cosmos/sdk-application-tutorial/x/nameservice/types" // its replaced in go mod
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth"
@@ -23,15 +23,16 @@ func GetTxCmd(storeKey string, cdc *codec.Codec) *cobra.Command {
 	}
 
 	nameserviceTxCmd.AddCommand(client.PostCommands(
-		GetCmdBuyName(cdc),
-		GetCmdSetName(cdc),
+		GetCmdBuyLocation(cdc),
+		GetCmdSetDAG(cdc),
 	)...)
 
 	return nameserviceTxCmd
 }
 
-// GetCmdBuyName is the CLI command for sending a BuyName transaction
-func GetCmdBuyName(cdc *codec.Codec) *cobra.Command {
+// TODO remeber to out lat lon in args!
+// GetCmdBuyLocation is the CLI command for sending a BuyName transaction
+func GetCmdBuyLocation(cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
 		Use:   "buy-name [name] [amount]",
 		Short: "bid for existing name or claim new name",
@@ -50,7 +51,7 @@ func GetCmdBuyName(cdc *codec.Codec) *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgBuyName(args[0], coins, cliCtx.GetFromAddress())
+			msg := types.NewMsgBuyLocation(args[0], coins, cliCtx.GetFromAddress(), args[2], args[3])
 			err = msg.ValidateBasic()
 			if err != nil {
 				return err
@@ -63,8 +64,8 @@ func GetCmdBuyName(cdc *codec.Codec) *cobra.Command {
 	}
 }
 
-// GetCmdSetName is the CLI command for sending a SetName transaction
-func GetCmdSetName(cdc *codec.Codec) *cobra.Command {
+// GetCmdSetDAG is the CLI command for sending a new DAG transaction
+func GetCmdSetDAG(cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
 		Use:   "set-name [name] [value]",
 		Short: "set the value associated with a name that you own",

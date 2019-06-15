@@ -11,7 +11,7 @@ const (
 )
 
 var (
-	NewMsgBuyName = types.NewMsgBuyName
+	NewMsgBuyName = types.NewMsgBuyLocation
 	NewMsgSetName = types.NewMsgSetName
 	NewWhois      = types.NewWhois
 	ModuleCdc     = types.ModuleCdc
@@ -19,8 +19,8 @@ var (
 )
 
 type (
-	MsgSetName      = types.MsgSetName
-	MsgBuyName      = types.MsgBuyName
+	MsgSetName      = types.MsgSetDAG
+	MsgBuyName      = types.MsgBuyLocation
 	QueryResResolve = types.QueryResResolve
 	QueryResNames   = types.QueryResNames
 	Whois           = types.Whois

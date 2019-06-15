@@ -75,15 +75,18 @@ func (k Keeper) SetOwner(ctx sdk.Context, name string, owner sdk.AccAddress) {
 	k.SetWhois(ctx, name, whois)
 }
 
+var MinNamePrice = sdk.Coins{sdk.NewInt64Coin("locationtoken", 1)}
+
 // GetPrice - gets the current price of a name
 func (k Keeper) GetPrice(ctx sdk.Context, name string) sdk.Coins {
-	return k.GetWhois(ctx, name).Price
+	//return k.GetWhois(ctx, name).Price
+	return MinNamePrice // TODO For now we disabling buing buildings
 }
 
 // SetPrice - sets the current price of a name
 func (k Keeper) SetPrice(ctx sdk.Context, name string, price sdk.Coins) {
 	whois := k.GetWhois(ctx, name)
-	whois.Price = price
+	//whois.Price = price // TODO For now we disabling buing buildings
 	k.SetWhois(ctx, name, whois)
 }
 

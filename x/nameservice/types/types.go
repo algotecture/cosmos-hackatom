@@ -7,20 +7,22 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-// Initial Starting Price for a name that was never previously owned
-var MinNamePrice = sdk.Coins{sdk.NewInt64Coin("nametoken", 1)}
+// Initial Starting Price for a address that was never previously owned
+// var MinNamePrice = sdk.Coins{sdk.NewInt64Coin("locationtoken", 1)}
 
 // Whois is a struct that contains all the metadata of a name
 type Whois struct {
-	Value string         `json:"value"`
+	Value string         `json:"value"` // name of street
 	Owner sdk.AccAddress `json:"owner"`
-	Price sdk.Coins      `json:"price"`
+	Lat   float64        `json:"lat"`
+	Lon   float64        `json:"lon"`
+	Zip   string         `json:"zip"`
 }
 
 // Returns a new Whois with the minprice as the price
 func NewWhois() Whois {
 	return Whois{
-		Price: MinNamePrice,
+		//Lat: MinNamePrice,
 	}
 }
 
@@ -28,5 +30,7 @@ func NewWhois() Whois {
 func (w Whois) String() string {
 	return strings.TrimSpace(fmt.Sprintf(`Owner: %s
 Value: %s
-Price: %s`, w.Owner, w.Value, w.Price))
+Lat: %s
+Lon: %s
+Zip: %s`, w.Owner, w.Value, w.Lat, w.Lon, w.Zip))
 }
