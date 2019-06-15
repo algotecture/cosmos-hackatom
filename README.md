@@ -61,6 +61,14 @@ nscli query account (nscli keys show alice -a)
 
 
 nscli tx nameservice buy-name AlexPlatz1 5nametoken 52.521918 13.413215 --from jack
+## SET DAG
+nscli tx nameservice set-dag AlexPlatz1 (cat dag.json) --from jack --gas 20000000000
+nscli query nameservice resolve AlexPlatz1
+
+.... TODO finishme
+
+## TODO 
+resolver
 
 nscli rest-server --chain-id buildings --trust-node
 
