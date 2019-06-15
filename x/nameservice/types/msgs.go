@@ -6,15 +6,16 @@ import (
 
 const RouterKey = ModuleName // this was defined in your key.go file
 
-// TODO MsgSetDAG defines a SetName message
+// TODO MsgSetDAG defines a message
 type MsgSetDAG struct {
 	Name  string         `json:"name"`
 	Value string         `json:"value"`
 	Owner sdk.AccAddress `json:"owner"`
 }
 
-// NewMsgSetName is a constructor function for MsgSetDAG
-func NewMsgSetName(name string, value string, owner sdk.AccAddress) MsgSetDAG {
+// TODO !!
+// NewMsgSetDAG is a constructor function for MsgSetDAG
+func NewMsgSetDAG(name string, value string, owner sdk.AccAddress) MsgSetDAG {
 	return MsgSetDAG{
 		Name:  name,
 		Value: value,

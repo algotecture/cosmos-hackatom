@@ -37,14 +37,22 @@ ipfs cat QmWHTHBapomvBksnuAWSQZ47ckj3LrGgmb7D2r1WXExNEX
 ```
 
 ## TODO discuss things
-- [ ] Branding internet of BUildings
+- [ ] Branding internet of Buildings
 - [ ] Purchasing buildings
+    - [ ] split ownership as CrowdHouse
     - should it be in DAG.. maybe in the chain ?
-    - this in DAG `OWNERHISTORY/ApplicationIdentifier`
-    - is it enough to remove notariary office
-- [ ] TDD aproach to buildings
+    - [X] this in DAG `OWNERHISTORY/ApplicationIdentifier`
+        - should go to to ownership chain
+    - is it enough to remove notarial office
+- [ ] TDD approach to buildings with smart contracts
+    - automatically recalculate stress tests,
+    - automatically recreate energy norms
+    - automatically recreate ISO-Norms
 - [ ] Forking buildings, and paying for DAG to clone
     - [ ] should DAG be private
+        - maybe a private chain for it ?
     - [ ] how enforce payments of for DAG's 
-    - [ ] how to encrypt DAG's
-    - [ ] is IPFS good place to handle DAG?   
+    - [X] how to encrypt DAG's
+        - DAG can be private 
+    - [X] is IPFS good place to handle DAG?   
+        - maybe just use private chain

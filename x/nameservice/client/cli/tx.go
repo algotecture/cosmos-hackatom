@@ -31,7 +31,7 @@ func GetTxCmd(storeKey string, cdc *codec.Codec) *cobra.Command {
 }
 
 // TODO remeber to out lat lon in args!
-// GetCmdBuyLocation is the CLI command for sending a BuyName transaction
+// GetCmdBuyLocation is the CLI command for sending a BuyLocation transaction
 func GetCmdBuyLocation(cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
 		Use:   "buy-name [name] [amount]",
@@ -79,7 +79,7 @@ func GetCmdSetDAG(cdc *codec.Codec) *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgSetName(args[0], args[1], cliCtx.GetFromAddress())
+			msg := types.NewMsgSetDAG(args[0], args[1], cliCtx.GetFromAddress())
 			err := msg.ValidateBasic()
 			if err != nil {
 				return err
