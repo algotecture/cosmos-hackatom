@@ -36,6 +36,35 @@ ipfs daemon &
 ipfs cat QmWHTHBapomvBksnuAWSQZ47ckj3LrGgmb7D2r1WXExNEX
 ```
 
+## TESTS
+```fish
+nsd unsafe-reset-all
+rm -rf ~/.nsd/config/genesis.json
+nsd init syzer --chain-id buildings
+nscli keys add jack
+nscli keys add alice
+nsd add-genesis-account (nscli keys show jack -a) 1000nametoken,100000000stake
+nsd add-genesis-account (nscli keys show alice -a) 1000nametoken,100000000stake
+nscli config chain-id buildings
+nscli config output json
+nscli config indent true
+nscli config trust-node true
+nsd gentx --name jack
+nsd collect-gentxs
+nsd validate-genesis
+nsd start
+
+
+
+```
+
+nscli rest-server --chain-id syzer --trust-node
+
+
+
+
+
+
 ## TODO discuss things
 - [ ] Branding internet of Buildings
 - [ ] Purchasing buildings

@@ -14,8 +14,8 @@ import (
 type Whois struct {
 	Value string         `json:"value"` // name of street
 	Owner sdk.AccAddress `json:"owner"`
-	Lat   float64        `json:"lat"`
-	Lon   float64        `json:"lon"`
+	Lat   string         `json:"lat"` // floating point types are unsafe for go-amino
+	Lon   string         `json:"lon"` // floating point types are unsafe for go-amino
 	Zip   string         `json:"zip"`
 }
 

@@ -9,8 +9,8 @@ const RouterKey = ModuleName // this was defined in your key.go file
 // TODO MsgSetDAG defines a message
 type MsgSetDAG struct {
 	Name  string         `json:"name"`
-	Value string         `json:"value"`
-	Owner sdk.AccAddress `json:"owner"`
+	Value string         `json:"value"` //
+	Owner sdk.AccAddress `json:"owner"` // should be only owner of last append.. but let's skip it
 }
 
 // TODO !!

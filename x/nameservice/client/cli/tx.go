@@ -30,7 +30,7 @@ func GetTxCmd(storeKey string, cdc *codec.Codec) *cobra.Command {
 	return nameserviceTxCmd
 }
 
-// TODO remeber to out lat lon in args!
+// TODO remember to out lat lon in args!
 // GetCmdBuyLocation is the CLI command for sending a BuyLocation transaction
 func GetCmdBuyLocation(cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
