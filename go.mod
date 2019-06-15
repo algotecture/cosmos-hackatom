@@ -28,4 +28,4 @@ require (
 
 replace golang.org/x/crypto => github.com/tendermint/crypto v0.0.0-20180820045704-3764759f34a5
 
-replace github.com/cosmos/sdk-application-tutorial/x/nameservice/types => ./x/nameservice/types
+replace github.com/cosmos/sdk-application-tutorial/x/nameservice => ./x/nameservice

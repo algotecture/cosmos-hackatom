@@ -86,7 +86,7 @@ func (k Keeper) GetPrice(ctx sdk.Context, name string) sdk.Coins {
 // SetPrice - sets the current price of a name
 func (k Keeper) SetPrice(ctx sdk.Context, name string, price sdk.Coins) {
 	whois := k.GetWhois(ctx, name)
-	//whois.Price = price // TODO For now we disabling buing buildings
+	// whois.Price = price // TODO For now we disabling buing buildings
 	k.SetWhois(ctx, name, whois)
 }
 

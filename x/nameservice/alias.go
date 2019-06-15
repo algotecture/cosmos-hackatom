@@ -12,7 +12,7 @@ const (
 
 var (
 	NewMsgBuyLocation = types.NewMsgBuyLocation
-	NewMsgSetName     = types.NewMsgSetDAG
+	NewMsgSetDAG      = types.NewMsgSetDAG
 	NewWhois          = types.NewWhois
 	ModuleCdc         = types.ModuleCdc
 	RegisterCodec     = types.RegisterCodec

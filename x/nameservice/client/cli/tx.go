@@ -34,9 +34,9 @@ func GetTxCmd(storeKey string, cdc *codec.Codec) *cobra.Command {
 // GetCmdBuyLocation is the CLI command for sending a BuyLocation transaction
 func GetCmdBuyLocation(cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
-		Use:   "buy-name [name] [amount]",
-		Short: "bid for existing name or claim new name",
-		Args:  cobra.ExactArgs(2),
+		Use:   "buy-location [name] [amount] [lat] [lon]",
+		Short: "bid for existing location or claim new place",
+		Args:  cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx := context.NewCLIContext().WithCodec(cdc).WithAccountDecoder(cdc)
 
@@ -67,7 +67,7 @@ func GetCmdBuyLocation(cdc *codec.Codec) *cobra.Command {
 // GetCmdSetDAG is the CLI command for sending a new DAG transaction
 func GetCmdSetDAG(cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
-		Use:   "set-name [name] [value]",
+		Use:   "set-dag [name] [value]",
 		Short: "set the value associated with a name that you own",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
