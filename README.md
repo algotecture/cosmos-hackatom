@@ -65,7 +65,8 @@ nscli tx nameservice buy-name AlexPlatz1 5nametoken 52.521918 13.413215 --from j
 nscli tx nameservice set-dag AlexPlatz1 (cat dag.json) --from jack --gas 20000000000
 nscli query nameservice resolve AlexPlatz1
 
-.... TODO finishme
+nscli query nameservice whois AlexPlatz1
+nscli tx nameservice buy-location AlexPlatz1 10nametoken 52.521918 13.413215 --from alice
 
 ## TODO 
 resolver
