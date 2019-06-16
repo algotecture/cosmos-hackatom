@@ -1,6 +1,6 @@
 # SDK Application Tutorial
 
-This repository contains the source code of the nameservice tutorial.
+This repository contains the source code of the nameservice tutorial!
 
 ## Tutorial
 
@@ -89,7 +89,7 @@ bash test.sh
 
 
 ## Adding peers to chain
-Edit config file in: 
+Edit config file in:
 ```bash
 ls ~/.nsd/config/config.toml
 ```
@@ -126,8 +126,8 @@ msg := types.NewMsgSetDAG(args[0], args[1], cliCtx.GetFromAddress())
 - [ ] Forking buildings, and paying for DAG to clone
     - [ ] should DAG be private
         - maybe a private chain for it ?
-    - [ ] how enforce payments of for DAG's 
+    - [ ] how enforce payments of for DAG's
     - [X] how to encrypt DAG's
-        - DAG can be private 
-    - [X] is IPFS good place to handle DAG?   
+        - DAG can be private
+    - [X] is IPFS good place to handle DAG?
         - maybe just use private chain
