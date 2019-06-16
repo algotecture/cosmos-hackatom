@@ -5,6 +5,7 @@ import "strings"
 // Query Result Payload for a resolve query
 type QueryResResolve struct {
 	Value string `json:"value"`
+	Lat   string `json:"lat"`
 }
 
 // implement fmt.Stringer
@@ -13,9 +14,9 @@ func (r QueryResResolve) String() string {
 }
 
 // Query Result Payload for a names query
-type QueryResNames []string
+type QueryResLocations []string
 
 // implement fmt.Stringer
-func (n QueryResNames) String() string {
+func (n QueryResLocations) String() string {
 	return strings.Join(n[:], "\n")
 }

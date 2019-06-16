@@ -45,7 +45,7 @@ func InitGenesis(ctx sdk.Context, keeper Keeper, data GenesisState) []abci.Valid
 
 func ExportGenesis(ctx sdk.Context, k Keeper) GenesisState {
 	var records []Whois
-	iterator := k.GetNamesIterator(ctx)
+	iterator := k.GetLocationsIterator(ctx)
 	for ; iterator.Valid(); iterator.Next() {
 		name := string(iterator.Key())
 		var whois Whois

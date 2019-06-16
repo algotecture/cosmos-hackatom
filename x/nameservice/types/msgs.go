@@ -17,7 +17,7 @@ type MsgSetDAG struct {
 // NewMsgSetDAG is a constructor function for MsgSetDAG
 func NewMsgSetDAG(name string, value string, owner sdk.AccAddress) MsgSetDAG {
 	return MsgSetDAG{
-		Name:  name,
+		Name:  name, // AlexPlatz1
 		Value: value,
 		Owner: owner,
 	}

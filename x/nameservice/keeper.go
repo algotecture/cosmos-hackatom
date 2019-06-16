@@ -46,13 +46,17 @@ func (k Keeper) SetWhois(ctx sdk.Context, name string, whois Whois) {
 	store.Set([]byte(name), k.cdc.MustMarshalBinaryBare(whois))
 }
 
-// ResolveName - returns the string that the name resolves to
-func (k Keeper) ResolveName(ctx sdk.Context, name string) string {
+// ResolveLocation - returns the string that the location resolves to
+func (k Keeper) ResolveLocation(ctx sdk.Context, name string) string {
 	return k.GetWhois(ctx, name).Value
 }
 
-// SetName - sets the value string that a name resolves to
-func (k Keeper) SetName(ctx sdk.Context, name string, value string) {
+func (k Keeper) ResolveLat(ctx sdk.Context, name string) string {
+	return k.GetWhois(ctx, name).Lat
+}
+
+// SetLocation - sets the value string that a name resolves to
+func (k Keeper) SetLocation(ctx sdk.Context, name string, value string) {
 	whois := k.GetWhois(ctx, name)
 	whois.Value = value
 	k.SetWhois(ctx, name, whois)
@@ -91,7 +95,7 @@ func (k Keeper) SetPrice(ctx sdk.Context, name string, price sdk.Coins) {
 }
 
 // Get an iterator over all names in which the keys are the names and the values are the whois
-func (k Keeper) GetNamesIterator(ctx sdk.Context) sdk.Iterator {
+func (k Keeper) GetLocationsIterator(ctx sdk.Context) sdk.Iterator {
 	store := ctx.KVStore(k.storeKey)
 	return sdk.KVStorePrefixIterator(store, nil)
 }

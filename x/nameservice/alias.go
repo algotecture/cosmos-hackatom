@@ -22,6 +22,6 @@ type (
 	MsgSetDAG       = types.MsgSetDAG
 	MsgBuyLocation  = types.MsgBuyLocation
 	QueryResResolve = types.QueryResResolve
-	QueryResNames   = types.QueryResNames
+	QueryResNames   = types.QueryResLocations
 	Whois           = types.Whois
 )

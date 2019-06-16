@@ -11,9 +11,9 @@ func NewHandler(keeper Keeper) sdk.Handler {
 	return func(ctx sdk.Context, msg sdk.Msg) sdk.Result {
 		switch msg := msg.(type) {
 		case MsgSetDAG:
-			return handleMsgSetName(ctx, keeper, msg)
+			return handleMsgSetDAG(ctx, keeper, msg)
 		case MsgBuyLocation:
-			return handleMsgBuyName(ctx, keeper, msg)
+			return handleMsgBuyLocation(ctx, keeper, msg)
 		default:
 			errMsg := fmt.Sprintf("Unrecognized nameservice Msg type: %v", msg.Type())
 			return sdk.ErrUnknownRequest(errMsg).Result()
@@ -22,16 +22,16 @@ func NewHandler(keeper Keeper) sdk.Handler {
 }
 
 // Handle a message to set name
-func handleMsgSetName(ctx sdk.Context, keeper Keeper, msg MsgSetDAG) sdk.Result {
+func handleMsgSetDAG(ctx sdk.Context, keeper Keeper, msg MsgSetDAG) sdk.Result {
 	if !msg.Owner.Equals(keeper.GetOwner(ctx, msg.Name)) { // Checks if the the msg sender is the same as the current owner
 		return sdk.ErrUnauthorized("Incorrect Owner").Result() // If not, throw an error
 	}
-	keeper.SetName(ctx, msg.Name, msg.Value) // If so, set the name to the value specified in the msg.
-	return sdk.Result{}                      // return
+	keeper.SetLocation(ctx, msg.Name, msg.Value) // If so, set the name to the value specified in the msg.
+	return sdk.Result{}                          // return
 }
 
 // Handle a message to buy name
-func handleMsgBuyName(ctx sdk.Context, keeper Keeper, msg MsgBuyLocation) sdk.Result {
+func handleMsgBuyLocation(ctx sdk.Context, keeper Keeper, msg MsgBuyLocation) sdk.Result {
 	if keeper.GetPrice(ctx, msg.Name).IsAllGT(msg.Bid) { // Checks if the the bid price is greater than the price paid by the current owner
 		return sdk.ErrInsufficientCoins("Bid not high enough").Result() // If not, throw an error
 	}

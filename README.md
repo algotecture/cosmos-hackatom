@@ -60,9 +60,12 @@ nscli query account (nscli keys show jack -a)
 nscli query account (nscli keys show alice -a)
 
 
-nscli tx nameservice buy-name AlexPlatz1 5nametoken 52.521918 13.413215 --from jack
+```bash
+nscli tx nameservice buy-location AlexPlatz1 5nametoken 52.521918 13.413215 --from jack
+nscli tx nameservice buy-location BrandenburgerTor1 5nametoken 52.516275 13.377704 --from jack
+```
 ## SET DAG
-nscli tx nameservice set-dag AlexPlatz1 (cat dag.json) --from jack --gas 20000000000
+nscli tx nameservice set-dag AlexPlatz1 (cat ./data/dag.json) --from jack --gas 20000000000
 nscli query nameservice resolve AlexPlatz1
 
 nscli query nameservice whois AlexPlatz1
@@ -78,11 +81,19 @@ nscli rest-server --chain-id buildings --trust-node
 ```
 
 ## Tests
+```bash
+npm test
+bash test.sh
+```
 
 
+## Adding peers to chain
+Edit config file in: 
+```bash
+ls ~/.nsd/config/config.toml
+```
 
-
-## TODO 
+## TODO
 resolver
 for whois
 
@@ -90,6 +101,7 @@ for whois
 ```go
 msg := types.NewMsgSetDAG(args[0], args[1], cliCtx.GetFromAddress())
 ```
+
 
 - [ ] validate DAG valid JSON.
 - [ ] add push to dag (now its replace)

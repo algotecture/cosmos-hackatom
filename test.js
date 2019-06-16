@@ -6,8 +6,10 @@ import dagOfAlexPlatz from './data/dag.json'
 let aliceId
 let jackId
 
-const getLocationsUrl = streenAndNumber =>
-  `http://localhost:1317/nameservice/names/${streenAndNumber}/whois`
+const getLocationsUrl = streetAndNumber =>
+  streetAndNumber
+    ? `http://localhost:1317/nameservice/locations/${streetAndNumber}/whois`
+    : `http://localhost:1317/nameservice/locations`
 
 // waits number of seconds.. because cosmos is not fast enough
 const wait = seconds =>
@@ -47,6 +49,12 @@ test('Alexander platz is taken', async t => {
 
   t.deepEqual(JSON.parse(alexPlatz.value), dagOfAlexPlatz)
   // TODO lat lon not empty
+})
+
+test('Get all locations', async t => {
+  const { data: locations } = await axios.get(getLocationsUrl())
+
+  t.deepEqual(locations, ['AlexPlatz1', 'BrandenburgerTor1'])
 })
 
 // TODO show buildings/ locations

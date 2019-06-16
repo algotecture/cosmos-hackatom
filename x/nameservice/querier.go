@@ -9,9 +9,9 @@ import (
 
 // query endpoints supported by the nameservice Querier
 const (
-	QueryResolve = "resolve"
-	QueryWhois   = "whois"
-	QueryNames   = "names"
+	QueryResolve   = "resolve"
+	QueryWhois     = "whois"
+	QueryLocations = "locations"
 )
 
 // NewQuerier is the module level router for state queries
@@ -22,8 +22,8 @@ func NewQuerier(keeper Keeper) sdk.Querier {
 			return queryResolve(ctx, path[1:], req, keeper)
 		case QueryWhois:
 			return queryWhois(ctx, path[1:], req, keeper)
-		case QueryNames:
-			return queryNames(ctx, req, keeper)
+		case QueryLocations:
+			return queryLocations(ctx, req, keeper)
 		default:
 			return nil, sdk.ErrUnknownRequest("unknown nameservice query endpoint")
 		}
@@ -32,13 +32,14 @@ func NewQuerier(keeper Keeper) sdk.Querier {
 
 // nolint: unparam
 func queryResolve(ctx sdk.Context, path []string, req abci.RequestQuery, keeper Keeper) ([]byte, sdk.Error) {
-	value := keeper.ResolveName(ctx, path[0])
+	location := keeper.ResolveLocation(ctx, path[0]) // path[0] is a location/name
+	lat := keeper.ResolveLocation(ctx, path[0])
 
-	if value == "" {
-		return []byte{}, sdk.ErrUnknownRequest("could not resolve name")
+	if location == "" {
+		return []byte{}, sdk.ErrUnknownRequest("could not resolve location")
 	}
 
-	res, err := codec.MarshalJSONIndent(keeper.cdc, QueryResResolve{value})
+	res, err := codec.MarshalJSONIndent(keeper.cdc, QueryResResolve{location, lat})
 	if err != nil {
 		panic("could not marshal result to JSON")
 	}
@@ -58,10 +59,10 @@ func queryWhois(ctx sdk.Context, path []string, req abci.RequestQuery, keeper Ke
 	return res, nil
 }
 
-func queryNames(ctx sdk.Context, req abci.RequestQuery, keeper Keeper) ([]byte, sdk.Error) {
+func queryLocations(ctx sdk.Context, req abci.RequestQuery, keeper Keeper) ([]byte, sdk.Error) {
 	var namesList QueryResNames
 
-	iterator := keeper.GetNamesIterator(ctx)
+	iterator := keeper.GetLocationsIterator(ctx)
 
 	for ; iterator.Valid(); iterator.Next() {
 		namesList = append(namesList, string(iterator.Key()))

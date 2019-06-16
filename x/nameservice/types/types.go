@@ -22,7 +22,9 @@ type Whois struct {
 // Returns a new Whois with the minprice as the price
 func NewWhois() Whois {
 	return Whois{
-		// Lat: MinNamePrice,
+		Lat: "666",
+		Lon: "666",
+		// TODO unmarshall values
 	}
 }
 

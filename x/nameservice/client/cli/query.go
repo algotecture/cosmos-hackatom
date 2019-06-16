@@ -22,7 +22,7 @@ func GetQueryCmd(storeKey string, cdc *codec.Codec) *cobra.Command {
 	nameserviceQueryCmd.AddCommand(client.GetCommands(
 		GetCmdResolveName(storeKey, cdc),
 		GetCmdWhois(storeKey, cdc),
-		GetCmdNames(storeKey, cdc),
+		GetCmdLocations(storeKey, cdc),
 	)...)
 	return nameserviceQueryCmd
 }
@@ -53,16 +53,16 @@ func GetCmdResolveName(queryRoute string, cdc *codec.Codec) *cobra.Command {
 // GetCmdWhois queries information about a domain
 func GetCmdWhois(queryRoute string, cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
-		Use:   "whois [name]",
-		Short: "Query whois info of name",
+		Use:   "whois [location]",
+		Short: "Query whois info of location",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx := context.NewCLIContext().WithCodec(cdc)
-			name := args[0]
+			location := args[0]
 
-			res, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/whois/%s", queryRoute, name), nil)
+			res, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/whois/%s", queryRoute, location), nil)
 			if err != nil {
-				fmt.Printf("could not resolve whois - %s \n", name)
+				fmt.Printf("could not resolve whois - %s \n", location)
 				return nil
 			}
 
@@ -73,22 +73,22 @@ func GetCmdWhois(queryRoute string, cdc *codec.Codec) *cobra.Command {
 	}
 }
 
-// GetCmdNames queries a list of all names
-func GetCmdNames(queryRoute string, cdc *codec.Codec) *cobra.Command {
+// GetCmdLocations queries a list of all locations
+func GetCmdLocations(queryRoute string, cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
-		Use:   "names",
-		Short: "names",
+		Use:   "locations",
+		Short: "locations",
 		// Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx := context.NewCLIContext().WithCodec(cdc)
 
-			res, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/names", queryRoute), nil)
+			res, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/locations", queryRoute), nil)
 			if err != nil {
-				fmt.Printf("could not get query names\n")
+				fmt.Printf("could not get query locations\n")
 				return nil
 			}
 
-			var out types.QueryResNames
+			var out types.QueryResLocations
 			cdc.MustUnmarshalJSON(res, &out)
 			return cliCtx.PrintOutput(out)
 		},
