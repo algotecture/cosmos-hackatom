@@ -66,12 +66,25 @@ nscli tx nameservice set-dag AlexPlatz1 (cat dag.json) --from jack --gas 2000000
 nscli query nameservice resolve AlexPlatz1
 
 nscli query nameservice whois AlexPlatz1
+
+## bid/buy buildings
+```bash
 nscli tx nameservice buy-location AlexPlatz1 10nametoken 52.521918 13.413215 --from alice
+```
+
+## REST
+```bash
+nscli rest-server --chain-id buildings --trust-node
+```
+
+## Tests
+
+
+
 
 ## TODO 
 resolver
-
-nscli rest-server --chain-id buildings --trust-node
+for whois
 
 
 

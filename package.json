@@ -1,0 +1,26 @@
+{
+  "name": "sdk-application-tutorial",
+  "version": "1.0.0",
+  "description": "This repository contains the source code of the nameservice tutorial.",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/algotecture/cosmos-hackatom.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/algotecture/cosmos-hackatom/issues"
+  },
+  "homepage": "https://github.com/algotecture/cosmos-hackatom#readme",
+  "devDependencies": {
+    "ava": "^2.1.0",
+    "execa": "^1.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
+}
