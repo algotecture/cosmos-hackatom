@@ -1,5 +1,13 @@
 import test from 'ava'
 import execa from 'execa'
+import axios from 'axios'
+import dagOfAlexPlatz from './data/dag.json'
+
+let aliceId
+let jackId
+
+const getLocationsUrl = streenAndNumber =>
+  `http://localhost:1317/nameservice/names/${streenAndNumber}/whois`
 
 // waits number of seconds.. because cosmos is not fast enough
 const wait = seconds =>
@@ -8,7 +16,8 @@ const wait = seconds =>
 
 test('Alice have keys', async t => {
   const getAliceId = `nscli keys show alice -a`
-  const { stdout: aliceId } = await execa.shell(getAliceId)
+  const resp = await execa.shell(getAliceId)
+  aliceId = resp.stdout
   // await wait(2)
   t.truthy(aliceId.startsWith('cosmos'))
 })
@@ -17,9 +26,29 @@ test('Jack have keys', async t => {
   await wait(2)
 
   const getJackId = `nscli keys show jack -a`
-  const { stdout: jackId } = await execa.shell(getJackId)
+  const resp = await execa.shell(getJackId)
+  jackId = resp.stdout
+
   t.truthy(jackId.startsWith('cosmos'))
 })
 
-const getAccountUrl = `http://localhost:1317/auth/accounts/`
 
+test('Alexander platz is taken', async t => {
+  const { data: alexPlatz } = await axios.get(getLocationsUrl('AlexPlatz1'))
+
+  await wait(3)
+  const getJackId = `nscli keys show jack -a`
+  const resp = await execa.shell(getJackId)
+  jackId = resp.stdout
+
+  t.truthy(alexPlatz.owner)
+  t.deepEqual(alexPlatz.owner, jackId, 'Alex')
+
+
+  t.deepEqual(JSON.parse(alexPlatz.value), dagOfAlexPlatz)
+  // TODO lat lon not empty
+})
+
+// TODO show buildings/ locations
+// $ curl -s http://localhost:1317/nameservice/names/jack1.id
+const getAccountUrl = `http://localhost:1317/auth/accounts/`

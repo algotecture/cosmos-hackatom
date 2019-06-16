@@ -86,6 +86,13 @@ nscli rest-server --chain-id buildings --trust-node
 resolver
 for whois
 
+- [ ] FIX set-dag of AlexPlatz... maybe its resets lat lon
+```go
+msg := types.NewMsgSetDAG(args[0], args[1], cliCtx.GetFromAddress())
+```
+
+- [ ] validate DAG valid JSON.
+- [ ] add push to dag (now its replace)
 
 
 
