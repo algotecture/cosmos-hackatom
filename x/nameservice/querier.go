@@ -32,14 +32,14 @@ func NewQuerier(keeper Keeper) sdk.Querier {
 
 // nolint: unparam
 func queryResolve(ctx sdk.Context, path []string, req abci.RequestQuery, keeper Keeper) ([]byte, sdk.Error) {
-	location := keeper.ResolveLocation(ctx, path[0]) // path[0] is a location/name
-	lat := keeper.ResolveLocation(ctx, path[0])
+	dagValue := keeper.ResolveValue(ctx, path[0]) // path[0] is a dagValue/name
+	lat := keeper.ResolveLat(ctx, path[0])
 
-	if location == "" {
-		return []byte{}, sdk.ErrUnknownRequest("could not resolve location")
+	if dagValue == "" {
+		return []byte{}, sdk.ErrUnknownRequest("could not resolve dagValue")
 	}
 
-	res, err := codec.MarshalJSONIndent(keeper.cdc, QueryResResolve{location, lat})
+	res, err := codec.MarshalJSONIndent(keeper.cdc, QueryResResolve{dagValue, lat})
 	if err != nil {
 		panic("could not marshal result to JSON")
 	}

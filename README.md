@@ -66,6 +66,7 @@ nscli tx nameservice buy-location BrandenburgerTor1 5nametoken 52.516275 13.3777
 ```
 ## SET DAG
 nscli tx nameservice set-dag AlexPlatz1 (cat ./data/dag.json) --from jack --gas 20000000000
+nscli tx nameservice set-dag BrandenburgerTor1 (cat ./data/dag.json) --from jack --gas 20000000000
 nscli query nameservice resolve AlexPlatz1
 
 nscli query nameservice whois AlexPlatz1

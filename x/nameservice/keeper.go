@@ -46,8 +46,8 @@ func (k Keeper) SetWhois(ctx sdk.Context, name string, whois Whois) {
 	store.Set([]byte(name), k.cdc.MustMarshalBinaryBare(whois))
 }
 
-// ResolveLocation - returns the string that the location resolves to
-func (k Keeper) ResolveLocation(ctx sdk.Context, name string) string {
+// ResolveValue - returns the string that the location resolves to
+func (k Keeper) ResolveValue(ctx sdk.Context, name string) string {
 	return k.GetWhois(ctx, name).Value
 }
 
